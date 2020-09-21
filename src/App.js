@@ -21,7 +21,7 @@ const App = () =>{
 
    if (!list.includes(currentItem) && (!!currentItem)) {
     newList([
-     ...list, {name: currentItem, isDone}
+      {name: currentItem, isDone}, ...list, 
    ]) 
    } else {
     alert('List item is already exist / input field is blank')
