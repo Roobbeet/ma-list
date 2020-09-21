@@ -1,0 +1,14 @@
+.item-container {
+    background-color: #bbbbbb88;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 10px;
+
+}
+.remove-button {
+    /* border: 1px solid black;
+    border-radius: 50%;
+    padding: 0 8px; */
+    font-size: 25px;
+}
