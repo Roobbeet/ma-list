@@ -17,3 +17,6 @@
     text-decoration: line-through;
     background-color: transparent;
 }
+.hidden {
+    display: none
+}
