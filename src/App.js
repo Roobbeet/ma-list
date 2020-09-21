@@ -61,12 +61,12 @@ const handleTitle = async event => {
         <h1 className="title">MA-Listo</h1>
       <form className="title-form">
         <label>
-          <input className="title-field" type="text" name="name" onChange={handleTitle} defaultValue="" onSubmit={(event) => event.preventDefault()} placeholder="List Name Here"/>
+          <input className="title-field" type="text" name="name" onChange={handleTitle} defaultValue="" onSubmit={(event) => event.preventDefault()} placeholder="List Title Here e.g. PC Build"/>
         </label>
       </form>
       <form onSubmit={handleAddList} >
         <label>
-          <input className="inputField" type="text" name="name" onChange={handleChange} defaultValue="" placeholder="New List Here!"/>
+          <input className="inputField" type="text" name="name" onChange={handleChange} defaultValue="" placeholder="New Item Here! e.g. RTX 3080"/>
         </label>
         <input type="submit" value="Submit" className="btn"/>
       </form>
