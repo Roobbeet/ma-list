@@ -4,13 +4,24 @@ import ListItem from './components/list/list.component';
 
 const App = () =>{
 
- const [incomingList, newList] = useState([{name: '', isDone: false}]);
+ const [list, newList] = useState([{name: '', isDone: false}]);
  const [isDone, setDone] = useState(false);
  const [currentItem, setCurrent] = useState('');
+ const [title, setTitle] = useState('')
+
  
  useEffect(() => {
+  const lastList = localStorage.getItem('lastItem');
+  if (lastList) {
+    newList([...list, lastList]);
+  }
   newList([])
+  // localStorage.getItem('title')
  }, []) 
+
+ useEffect(() => {  
+    // localStorage.setItem('title', title)
+ }, [])
  
 
  //handle add list
@@ -18,16 +29,16 @@ const App = () =>{
    event.preventDefault();
    event.target.reset();
 
-   if (!incomingList.includes(currentItem) && (!!currentItem)) {
+   if (!list.includes(currentItem) && (!!currentItem)) {
     newList([
-     ...incomingList, {name: currentItem, isDone}
+     ...list, {name: currentItem, isDone}
    ]) 
    } else {
     alert('List item is already exist / input field is blank')
    }
-   console.log(incomingList);
+   console.log(list);
    setCurrent('');
-
+   localStorage.setItem('lastItem', list)
  }
 
  //state sementara
@@ -38,12 +49,17 @@ const App = () =>{
  }
  //set done
  const handleDone = (item) => {
-  incomingList.filter(name => name.name !== item);
+  list.filter(name => name.name !== item);
   newList([
-    ...incomingList.filter(name => name.name !== item), {name: item, isDone: true}
+    ...list.filter(name => name.name !== item), {name: item, isDone: true}
   ])
  }
-
+//set Title
+const handleTitle = async event => {
+  event.preventDefault();
+  const {value} = await event.target;
+  setTitle(value)
+}
  
  //RESET FIELD
  const resetField = () => {
@@ -53,6 +69,11 @@ const App = () =>{
     return (
       <div className="App">
         <h1 className="title">MA-Listo</h1>
+      <form className="title-form">
+        <label>
+          <input className="title-field" type="text" name="name" onChange={handleTitle} defaultValue="" onSubmit={(event) => event.preventDefault()} placeholder="List Name Here"/>
+        </label>
+      </form>
       <form onSubmit={handleAddList} >
         <label>
           <input className="inputField" type="text" name="name" onChange={handleChange} defaultValue="" placeholder="New List Here!"/>
@@ -64,10 +85,10 @@ const App = () =>{
       
       <div className="List">
       <div className="New list-container">
-      <h2 className="list-title">Incoming</h2>
+      <h2 className="list-title">{title} List</h2>
       {
-        incomingList ?
-          incomingList.map(
+        list ?
+          list.map(
           (item) => (<ListItem isDone={item.isDone} handleDone={handleDone}
             key={item.name} item={item.name}></ListItem>)) : null
       } 

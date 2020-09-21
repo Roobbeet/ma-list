@@ -1,5 +1,5 @@
 .item-container {
-    background-color: #bbbbbb88;
+    background-color: #bbbbbb69;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -11,6 +11,11 @@
     border-radius: 50%;
     padding: 0 8px; */
     font-size: 25px;
+    margin-right: 10px;
+    background-color: transparent;
+}
+i {
+    background-color: transparent;
 }
 
 .done-task {
@@ -22,4 +27,5 @@
 }
 .item-name {
     margin-left: 20px;
+    background-color: transparent;
 }
