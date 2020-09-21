@@ -16,6 +16,7 @@ const App = () =>{
  //handle add list
  const handleAddList = (event) => {
    event.preventDefault();
+   event.target.reset();
 
    if (!incomingList.includes(currentItem) && (!!currentItem)) {
     newList([
@@ -26,6 +27,7 @@ const App = () =>{
    }
    console.log(incomingList);
    setCurrent('');
+
  }
 
  //state sementara
@@ -53,7 +55,7 @@ const App = () =>{
         <h1 className="title">MA-Listo</h1>
       <form onSubmit={handleAddList} >
         <label>
-          <input className="inputField" type="text" name="name" onChange={handleChange} placeholder="New List Here!"/>
+          <input className="inputField" type="text" name="name" onChange={handleChange} defaultValue="" placeholder="New List Here!"/>
         </label>
         <input type="submit" value="Submit" className="btn"/>
       </form>

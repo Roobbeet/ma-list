@@ -1,7 +1,7 @@
 .item-container {
     background-color: #bbbbbb88;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
 
@@ -18,5 +18,8 @@
     background-color: transparent;
 }
 .hidden {
-    display: none
+    display: none;
+}
+.item-name {
+    margin-left: 20px;
 }
