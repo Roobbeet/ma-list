@@ -1,13 +1,17 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.css';
 import ListItem from './components/list/list.component';
 
 const App = () =>{
- const [incomingList, newList] = useState(['Chika', '1234']);
- const [pastItem, doneItem] = useState(['dance', 'jessica']);
- const [currentItem, setCurrent] = useState('')
+
+ const [incomingList, newList] = useState([{name: '', isDone: false}]);
+ const [isDone, setDone] = useState(false);
+ const [currentItem, setCurrent] = useState('');
  
-//  const [aaa] = incomingList;
+ useEffect(() => {
+  newList([])
+ }, []) 
+ 
 
  //handle add list
  const handleAddList = (event) => {
@@ -15,7 +19,7 @@ const App = () =>{
 
    if (!incomingList.includes(currentItem) && (!!currentItem)) {
     newList([
-     ...incomingList, currentItem
+     ...incomingList, {name: currentItem, isDone}
    ]) 
    } else {
     alert('List item is already exist / input field is blank')
@@ -24,41 +28,24 @@ const App = () =>{
    setCurrent('');
  }
 
- //handle past list
- const handlePastList = event => {
-  event.preventDefault();
-  
-  //index untuk nyari item
-  const itemIndex = incomingList.findIndex(items => items === 'aaa')
-  console.log(itemIndex);
-
-  if(itemIndex >= 0) {
-    doneItem([
-      ...pastItem, incomingList[itemIndex]
-    ])
-    incomingList.filter(!incomingList[itemIndex]);
-   
-    console.log(incomingList);
-  }
-   
-
- }
-
  //state sementara
  const handleChange = async event => {
    const {value} = await event.target
     setCurrent(value);
     // console.log(value)
  }
- 
- const getItem = () => {
-  
+ //set done
+ const handleDone = (item) => {
+  incomingList.filter(name => name.name !== item);
+  newList([
+    ...incomingList.filter(name => name.name !== item), {name: item, isDone: true}
+  ])
  }
 
+ 
  //RESET FIELD
  const resetField = () => {
   newList([]);
-  doneItem([]);
  }
 
     return (
@@ -79,17 +66,9 @@ const App = () =>{
       {
         incomingList ?
           incomingList.map(
-          (item) => (<ListItem handlePastList={handlePastList}
-            key={item} item={item}></ListItem>)) : null
+          (item) => (<ListItem isDone={item.isDone} handleDone={handleDone}
+            key={item.name} item={item.name}></ListItem>)) : null
       } 
-      </div>
-      <div className="Old list-container">
-      <h2 className="list-title">Done</h2>
-        {
-          pastItem ?
-          pastItem.map(
-          (item) => (<h3 className="pastItem" key={item}>{item}</h3>)) : null
-        }
       </div>
       </div>
       </div>
@@ -98,3 +77,19 @@ const App = () =>{
 }
 
 export default App;
+
+
+//index untuk nyari item
+  /*
+  const itemIndex = incomingList.findIndex(items => items === 'aaa')
+  console.log(itemIndex);
+
+  if(itemIndex >= 0) {
+    doneItem([
+      ...pastItem, incomingList[itemIndex]
+    ])
+    incomingList.filter(!incomingList[itemIndex]);
+   
+    console.log(incomingList);
+  }
+   */

@@ -1,11 +1,11 @@
 import React from 'react';
 import './list.styles.css'
 
-const ListItem = ({item, handlePastList}) => {
+const ListItem = ({item, isDone, handleDone}) => {
     return(
-        <div className="item-container">
-            <h3 className="item-name" >{item}</h3>
-            <div className="remove-button" onClick={handlePastList}><i className="far fa-times-circle"></i></div>
+        <div className="item-container" onClick={() => handleDone(item)}>
+            <h2 className={`item-name ${isDone ? 'done-task' : ''}`} >{item}</h2>
+            <div className="remove-button" ><i className="far fa-times-circle"></i></div>
         </div>
     )
 }

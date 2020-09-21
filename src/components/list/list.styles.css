@@ -12,3 +12,7 @@
     padding: 0 8px; */
     font-size: 25px;
 }
+
+.done-task {
+    text-decoration: line-through;
+}
