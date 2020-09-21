@@ -80,7 +80,7 @@ font-family: 'Noto Sans JP', sans-serif;
 .title {
   margin-top: 0;
   font-size: 55px;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 .list-title {
   background-color: #282c3452;

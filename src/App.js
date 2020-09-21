@@ -63,7 +63,7 @@ const App = () =>{
 
     return (
       <div className="App">
-        <h1 className="title">Ma-Listo</h1>
+        <h1 className="title">MA-Listo</h1>
       <form onSubmit={handleAddList} >
         <label>
           <input className="inputField" type="text" name="name" onChange={handleChange} placeholder="New List Here!"/>
