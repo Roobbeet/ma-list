@@ -11,18 +11,8 @@ const App = () =>{
 
  
  useEffect(() => {
-  const lastList = localStorage.getItem('lastItem');
-  if (lastList) {
-    newList([...list, lastList]);
-  }
   newList([])
-  // localStorage.getItem('title')
  }, []) 
-
- useEffect(() => {  
-    // localStorage.setItem('title', title)
- }, [])
- 
 
  //handle add list
  const handleAddList = (event) => {
