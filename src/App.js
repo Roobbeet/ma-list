@@ -11,8 +11,16 @@ const App = () =>{
 
  
  useEffect(() => {
-  newList([])
+  const lastItems = JSON.parse(localStorage.getItem('listItem'));
+  console.log(lastItems);
+  // newList(lastItems);
+
+  console.log(list);
  }, []) 
+
+ useEffect(() => {
+   return () => localStorage.setItem('listItem', JSON.stringify(list));
+ }, [list])
 
  //handle add list
  const handleAddList = (event) => {
@@ -28,7 +36,6 @@ const App = () =>{
    }
    console.log(list);
    setCurrent('');
-   localStorage.setItem('lastItem', list)
  }
 
  //state sementara
@@ -79,8 +86,8 @@ const handleTitle = async event => {
       {
         list ?
           list.map(
-          (item) => (<ListItem isDone={item.isDone} handleDone={handleDone}
-            key={item.name} item={item.name}></ListItem>)) : null
+          (item) => (item.name ? <ListItem isDone={item.isDone} handleDone={handleDone}
+            key={`${item.name}`} item={item.name}></ListItem> : null)) : null
       } 
       </div>
       </div>
