@@ -13,9 +13,11 @@ const App = () =>{
  
  useEffect(() => {
   const lastItems = JSON.parse(localStorage.getItem('listItem'));
+  const lastTitle = JSON.parse(localStorage.getItem('listTitle'));
   console.log(lastItems);
-  if(lastItems) {
+  if(lastItems && lastTitle) {
     newList(lastItems, [...list]);
+    setTitle(lastTitle);
   }
   console.log(list);
  }, []) 
@@ -68,7 +70,7 @@ const handleTitle = async event => {
  
  //RESET FIELD
  const resetField = () => {
-  localStorage.clear()
+  localStorage.clear();
   newList([]);
   console.log(list);
   }
@@ -78,6 +80,7 @@ const handleTitle = async event => {
    alert('Your list is saved on the local storage, dont worry');
    console.log(list)
    localStorage.setItem('listItem', JSON.stringify(list));
+   localStorage.setItem('listTitle', JSON.stringify(title));
  }  
 
     return (
