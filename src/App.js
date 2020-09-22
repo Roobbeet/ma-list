@@ -35,8 +35,10 @@ const App = () =>{
  const handleAddList = async event => {
    event.preventDefault();
    await event.target.reset();
+   const {name, isDone} = currentItem;
+   console.log(name)
 
-   if (!list.includes(currentItem) && !past.includes(currentItem) && (!!currentItem)) {
+   if ((!list.includes(currentItem)) && (!past.includes(name)) && (!!currentItem)) {
     newList([
       {name: currentItem, isDone}, ...list, 
    ]) 
@@ -85,7 +87,7 @@ const handleTitle = async event => {
 
     return (
       <div className="App">
-        <h1 className="title">MA-Listo</h1>
+        <h1 className="title">MA-Listo by <a href="https://github.com/Roobbeet" target="_blank">Roobbeet</a></h1>
       <form className="title-form">
         <label>
           <input className="title-field" type="text" name="name" onChange={handleTitle} defaultValue="" onSubmit={(event) => event.preventDefault()} placeholder="List Title Here e.g. PC Build"/>
