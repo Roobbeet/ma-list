@@ -5,6 +5,7 @@ import ListItem from './components/list/list.component';
 const App = () =>{
 
  const [list, newList] = useState([{name: '', isDone: false}]);
+ const [past, newPast] = useState([{name: '', isDone: true}])
  const [isDone, setDone] = useState(false);
  const [currentItem, setCurrent] = useState('');
  const [title, setTitle] = useState('')
@@ -13,21 +14,27 @@ const App = () =>{
  useEffect(() => {
   const lastItems = JSON.parse(localStorage.getItem('listItem'));
   console.log(lastItems);
-  // newList(lastItems);
-
+  if(lastItems) {
+    newList(lastItems, [...list]);
+  }
   console.log(list);
  }, []) 
 
+ /*
  useEffect(() => {
-   return () => localStorage.setItem('listItem', JSON.stringify(list));
- }, [list])
+  alert('ComponentDidMount');
+  return () => {
+    
+    localStorage.setItem('listItem', JSON.stringify(list));
+  }
+ }, []) */
 
  //handle add list
- const handleAddList = (event) => {
+ const handleAddList = async event => {
    event.preventDefault();
-   event.target.reset();
+   await event.target.reset();
 
-   if (!list.includes(currentItem) && (!!currentItem)) {
+   if (!list.includes(currentItem) && !past.includes(currentItem) && (!!currentItem)) {
     newList([
       {name: currentItem, isDone}, ...list, 
    ]) 
@@ -46,6 +53,7 @@ const App = () =>{
  }
  //set done
  const handleDone = (item) => {
+  newPast([...past, {name: item, isDone: true}])
   list.filter(name => name.name !== item);
   newList([
     ...list.filter(name => name.name !== item), {name: item, isDone: true}
@@ -60,8 +68,17 @@ const handleTitle = async event => {
  
  //RESET FIELD
  const resetField = () => {
+  localStorage.clear()
   newList([]);
- }
+  console.log(list);
+  }
+  
+ //SAVE LIST {
+ const saveList = () => {
+   alert('Your list is saved on the local storage, dont worry');
+   console.log(list)
+   localStorage.setItem('listItem', JSON.stringify(list));
+ }  
 
     return (
       <div className="App">
@@ -78,7 +95,9 @@ const handleTitle = async event => {
         <input type="submit" value="Submit" className="btn"/>
       </form>
       
-      <button className="reset-btn btn" onClick={resetField}>RESET ALL</button>
+      <button className="reset-btn btn" onClick={resetField}>RESET</button>
+      <button className="reset-btn btn" onClick={saveList}>SAVE LIST</button>
+      
       
       <div className="List">
       <div className="New list-container">
